@@ -29,6 +29,15 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Exercice arcade #1")
         self.liste_cercles = []
 
+    def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
+        for cercle in self.liste_cercles:
+            distance = (cercle.centre_x - x) ** 2 + (cercle.centre_y - y) ** 2
+            if distance <= cercle.rayon ** 2:
+                if button == arcade.MOUSE_BUTTON_LEFT:
+                    self.liste_cercles.remove(cercle)
+                elif button == arcade.MOUSE_BUTTON_RIGHT:
+                    cercle.color = random.choice(COLORS)
+
     def setup(self):
 
         for _ in range(20):
